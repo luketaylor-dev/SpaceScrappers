@@ -16,6 +16,14 @@ C#/Unity
 - Utilize Unity's UI system (Canvas, UI elements) for creating user interfaces.
 - Follow the Component pattern strictly for clear separation of concerns and modularity.
 - Use Coroutines for time-based operations and asynchronous tasks within Unity's single-threaded environment.
+- Follow the following naming convention
+  ClassName
+  PublicVar
+  privateSerializedVar
+  \_privateVar
+  MethodName
+- Don't over comment, functionality should be clear through the method names or variables anyway. Unless something really needs the extra explanation. Avoid adding comments
+- Don't generate your own meta files, unity does that anyway, so there is no need
 
 Error Handling and Debugging
 
