@@ -392,9 +392,10 @@ GameObject:
   - component: {fileID: 3368414847091392955}
   - component: {fileID: 6766964208099838618}
   - component: {fileID: 974380172550165941}
-  - component: {fileID: 2341980425399916434}
   - component: {fileID: 7145469354280214514}
   - component: {fileID: 7609786798426153432}
+  - component: {fileID: 1250030930212401006}
+  - component: {fileID: 5337521180867102414}
   m_Layer: 0
   m_Name: FirstPersonController
   m_TagString: Player
@@ -538,7 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 4849535280377543764}
-  fov: 90
+  fov: 101.5
   invertCamera: 0
   cameraCanMove: 1
   mouseSensitivity: 0.26
@@ -561,7 +562,7 @@ MonoBehaviour:
   sprintSpeed: 7
   sprintDuration: 5
   sprintCooldown: 0.5
-  sprintFOV: 113.9
+  sprintFOV: 165.1
   sprintFOVStepTime: 10
   useSprintBar: 1
   hideBarWhenFull: 1
@@ -606,25 +607,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &2341980425399916434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5124725896360430441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 520be1e54283302c2ac42d88e49508b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NetworkFirstPersonController
-  ShowTopMostFoldoutHeaderGroup: 1
-  localController: {fileID: 6766964208099838618}
-  playerCamera: {fileID: 4849535280377543764}
-  audioListener: {fileID: 1646400286364312872}
-  playerUI: {fileID: 7160021311551291861}
-  characterModel: {fileID: 3255952758157393304}
-  characterRenderers: []
 --- !u!114 &7145469354280214514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,6 +670,43 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!114 &1250030930212401006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5124725896360430441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e90a490f8500e338caec5ed6653297b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction.PlayerInteraction
+  playerCamera: {fileID: 4849535280377543764}
+  interactionDistance: 2
+  interactionLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  interactActionReference: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+--- !u!114 &5337521180867102414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5124725896360430441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520be1e54283302c2ac42d88e49508b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkFirstPersonController
+  ShowTopMostFoldoutHeaderGroup: 1
+  localController: {fileID: 6766964208099838618}
+  playerCamera: {fileID: 4849535280377543764}
+  audioListener: {fileID: 1646400286364312872}
+  playerUI: {fileID: 7160021311551291861}
+  characterModel: {fileID: 3255952758157393304}
+  characterRenderers: []
 --- !u!1 &5272540838200382616
 GameObject:
   m_ObjectHideFlags: 0
