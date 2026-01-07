@@ -1,9 +1,10 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Interaction
 {
-    public class PlayerInteraction : MonoBehaviour
+    public class PlayerInteraction : NetworkBehaviour
     {
         [SerializeField] private Camera playerCamera;
         [SerializeField] private float interactionDistance = 2f;
@@ -29,20 +30,31 @@ namespace Interaction
             Debug.Log("Player camera set to: " + playerCamera);
         }
 
-        private void OnEnable()
+        public override void OnNetworkSpawn()
         {
-            Debug.Log("Player interaction enabled " + interactAction.name);
-            if (interactAction != null)
+            if (IsOwner)
             {
-                Debug.Log("Interact action set to: " + interactAction.name);
-                interactAction.Enable();
-                interactAction.performed += OnInteract;
+                if (interactAction != null)
+                {
+                    Debug.Log("Player interaction enabled " + interactAction.name);
+                    interactAction.Enable();
+                    interactAction.performed += OnInteract;
+                }
+            }
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            if (IsOwner && interactAction != null)
+            {
+                interactAction.performed -= OnInteract;
+                interactAction.Disable();
             }
         }
 
         private void OnDisable()
         {
-            if (interactAction != null)
+            if (IsOwner && interactAction != null)
             {
                 interactAction.performed -= OnInteract;
                 interactAction.Disable();
@@ -51,6 +63,9 @@ namespace Interaction
 
         private void Update()
         {
+            if (!IsOwner)
+                return;
+
             CheckForInteractable();
         }
 
@@ -103,10 +118,10 @@ namespace Interaction
 
         private void Interact()
         {
-            if (currentInteractable != null)
-            {
-               currentInteractable.Interact(gameObject);
-            }
+            if (!IsOwner || currentInteractable == null)
+                return;
+
+            currentInteractable.Interact(gameObject);
         }
 
         public void OnInteract(InputAction.CallbackContext context)

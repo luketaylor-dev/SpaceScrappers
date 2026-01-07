@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -16,6 +17,14 @@ public class NetworkFirstPersonController : NetworkBehaviour
     {
         if (localController == null)
             localController = GetComponent<FirstPersonController>();
+    }
+
+    private void Update()
+    {
+        if (transform.position.y < -10)
+        {
+            transform.position = NetworkManager.Singleton.transform.position;
+        }
     }
 
     public override void OnNetworkSpawn()
