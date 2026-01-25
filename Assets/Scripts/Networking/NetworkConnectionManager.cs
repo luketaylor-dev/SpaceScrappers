@@ -1,3 +1,4 @@
+using SpaceScrappers.Debugging;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
@@ -47,13 +48,13 @@ namespace SpaceScrappers.Networking
                 {
                     transport.ConnectionData.Address = serverIP;
                     transport.ConnectionData.Port = serverPort;
-                    Debug.Log($"Configured transport for client connection to {serverIP}:{serverPort}");
+                    GameLogger.Log($"Configured transport for client connection to {serverIP}:{serverPort}");
                 }
                 else
                 {
                     transport.ConnectionData.ServerListenAddress = LISTEN_ALL_INTERFACES;
                     transport.ConnectionData.Port = serverPort;
-                    Debug.Log($"Configured transport for host/server on port {serverPort}");
+                    GameLogger.Log($"Configured transport for host/server on port {serverPort}");
                 }
             }
             else
@@ -99,7 +100,7 @@ namespace SpaceScrappers.Networking
                 case ConnectionMode.Host:
                     if (NetworkManager.Singleton.StartHost())
                     {
-                        Debug.Log("Started as Host");
+                        GameLogger.Log("Started as Host");
                     }
                     else
                     {
@@ -110,7 +111,7 @@ namespace SpaceScrappers.Networking
                 case ConnectionMode.Client:
                     if (NetworkManager.Singleton.StartClient())
                     {
-                        Debug.Log($"Started as Client connecting to {serverIP}:{serverPort}");
+                        GameLogger.Log($"Started as Client connecting to {serverIP}:{serverPort}");
                     }
                     else
                     {
@@ -121,7 +122,7 @@ namespace SpaceScrappers.Networking
                 case ConnectionMode.Server:
                     if (NetworkManager.Singleton.StartServer())
                     {
-                        Debug.Log("Started as Server");
+                        GameLogger.Log("Started as Server");
                     }
                     else
                     {

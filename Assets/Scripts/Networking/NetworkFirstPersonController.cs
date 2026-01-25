@@ -1,4 +1,5 @@
 using System;
+using SpaceScrappers.Debugging;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -132,7 +133,7 @@ namespace SpaceScrappers.Networking
         {
             if (IsOwner)
             {
-                Debug.Log("Player respawned after falling");
+                GameLogger.Log("Player respawned after falling");
             }
         }
     }

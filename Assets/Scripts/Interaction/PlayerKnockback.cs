@@ -1,3 +1,4 @@
+using SpaceScrappers.Debugging;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -46,7 +47,6 @@ namespace SpaceScrappers.Interaction
                 return;
 
             float collisionVelocity = otherRigidbody.linearVelocity.magnitude;
-            Debug.Log("Collision Velocity: " + collisionVelocity);
             if (collisionVelocity < minVelocityForKnockback)
                 return;
 

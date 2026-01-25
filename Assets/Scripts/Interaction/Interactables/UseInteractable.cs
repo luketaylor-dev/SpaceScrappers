@@ -1,4 +1,5 @@
-﻿using Unity.Netcode;
+﻿using SpaceScrappers.Debugging;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace SpaceScrappers.Interaction
@@ -8,7 +9,7 @@ namespace SpaceScrappers.Interaction
     {
         private IInteractable.InteractType interactType = IInteractable.InteractType.Use;
         private OutlineEffect outlineEffect;
-        
+
         private void Awake()
         {
             outlineEffect = GetComponent<OutlineEffect>();
@@ -20,13 +21,11 @@ namespace SpaceScrappers.Interaction
 
         public void OnHoverStart()
         {
-            Debug.Log("Hovering over " + gameObject.name);
             outlineEffect?.EnableOutline();
         }
 
         public void OnHoverEnd()
         {
-            Debug.Log("Not hovering over " + gameObject.name);
             outlineEffect?.DisableOutline();
         }
 
@@ -37,7 +36,7 @@ namespace SpaceScrappers.Interaction
 
         public void Interact(NetworkObject player)
         {
-            Debug.Log("You used the " + gameObject.name);
+            GameLogger.Log($"Used {gameObject.name}");
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using SpaceScrappers.Debugging;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -31,14 +32,12 @@ namespace SpaceScrappers.Interaction
         public void OnHoverStart()
         {
             if (currentHolder) return;
-            Debug.Log("Hovering over " + gameObject.name);
             outlineEffect?.EnableOutline();
         }
 
         public void OnHoverEnd()
         {
             if (currentHolder) return;
-            Debug.Log("Not hovering over " + gameObject.name);
             outlineEffect?.DisableOutline();
         }
 

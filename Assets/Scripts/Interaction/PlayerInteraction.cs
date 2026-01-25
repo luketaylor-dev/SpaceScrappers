@@ -1,3 +1,4 @@
+using SpaceScrappers.Debugging;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -34,7 +35,6 @@ namespace SpaceScrappers.Interaction
         {
             if (playerCamera == null)
                 playerCamera = Camera.main;
-            Debug.Log("Player camera set to: " + playerCamera);
         }
 
         public override void OnNetworkSpawn()
@@ -43,7 +43,6 @@ namespace SpaceScrappers.Interaction
             {
                 if (interactAction != null)
                 {
-                    Debug.Log("Player interaction enabled " + interactAction.name);
                     interactAction.Enable();
                     interactAction.performed += OnInteract;
                 }
@@ -198,10 +197,8 @@ namespace SpaceScrappers.Interaction
         [Rpc(SendTo.Server)]
         private void PickupObjectServerRpc(ulong objectId)
         {
-            Debug.Log("Pickup");
             if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(objectId, out NetworkObject networkObject))
             {
-                Debug.Log("Pickup has value");
 
                 networkObject.ChangeOwnership(OwnerClientId);
 
@@ -217,10 +214,7 @@ namespace SpaceScrappers.Interaction
                     pickup.SetCollidersEnabled(false);
                 }
 
-                if (networkObject.TrySetParent(NetworkObject))
-                {
-                    Debug.Log("Server: Pickup parent set to player NetworkObject");
-                }
+                networkObject.TrySetParent(NetworkObject);
 
                 PickupObjectClientRpc(objectId);
             }
@@ -243,14 +237,7 @@ namespace SpaceScrappers.Interaction
                     pickup.SetCollidersEnabled(false);
                 }
 
-                if (networkObject.TrySetParent(NetworkObject))
-                {
-                    Debug.Log("Pickup parent set to player NetworkObject");
-                }
-                else
-                {
-                    Debug.LogError("Failed to set parent to player NetworkObject");
-                }
+                networkObject.TrySetParent(NetworkObject);
             }
         }
 
@@ -342,17 +329,13 @@ namespace SpaceScrappers.Interaction
                         rb.linearVelocity = throwDirection * throwForce;
                     }
                 }
-
-                Debug.Log("Object dropped and thrown");
             }
         }
 
         public void OnInteract(InputAction.CallbackContext context)
         {
-            Debug.Log("Interact button pressed");
             if (context.performed)
             {
-                Debug.Log("Interact button performed");
                 Interact();
             }
         }
