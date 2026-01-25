@@ -9,12 +9,10 @@ namespace SpaceScrappers.Interaction
     {
         private OutlineEffect outlineEffect;
 
-        private IInteractable.InteractType interactType = IInteractable.InteractType.Pickup;
+        private readonly IInteractable.InteractType interactType = IInteractable.InteractType.Pickup;
 
         private NetworkObject currentHolder;
-
-        private NetworkVariable<ulong> lastPickupOwner = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-
+        
         private Collider objectCollider;
         private Collider lastThrowerCollider;
         private Collider[] cachedColliders;
@@ -86,7 +84,6 @@ namespace SpaceScrappers.Interaction
                 if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(holderObjectId, out NetworkObject holderObject))
                 {
                     currentHolder = holderObject;
-                    lastPickupOwner.Value = newOwnerId;
                 }
             }
 
