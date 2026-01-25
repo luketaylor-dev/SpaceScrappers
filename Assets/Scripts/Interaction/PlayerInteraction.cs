@@ -210,10 +210,10 @@ namespace SpaceScrappers.Interaction
                     rb.isKinematic = true;
                 }
 
-                Collider[] colliders = networkObject.GetComponentsInChildren<Collider>();
-                foreach (Collider col in colliders)
+                PickupInteractable pickup = networkObject.GetComponent<PickupInteractable>();
+                if (pickup != null)
                 {
-                    col.enabled = false;
+                    pickup.SetCollidersEnabled(false);
                 }
 
                 if (networkObject.TrySetParent(NetworkObject))
@@ -236,10 +236,10 @@ namespace SpaceScrappers.Interaction
                     rb.isKinematic = true;
                 }
 
-                Collider[] colliders = networkObject.GetComponentsInChildren<Collider>();
-                foreach (Collider col in colliders)
+                PickupInteractable pickup = networkObject.GetComponent<PickupInteractable>();
+                if (pickup != null)
                 {
-                    col.enabled = false;
+                    pickup.SetCollidersEnabled(false);
                 }
 
                 if (networkObject.TrySetParent(NetworkObject))
@@ -302,10 +302,10 @@ namespace SpaceScrappers.Interaction
 
                 networkObject.transform.position = throwPosition;
 
-                Collider[] colliders = networkObject.GetComponentsInChildren<Collider>();
-                foreach (Collider col in colliders)
+                PickupInteractable pickup = networkObject.GetComponent<PickupInteractable>();
+                if (pickup != null)
                 {
-                    col.enabled = true;
+                    pickup.SetCollidersEnabled(true);
                 }
 
                 Rigidbody rb = networkObject.GetComponent<Rigidbody>();
@@ -326,10 +326,10 @@ namespace SpaceScrappers.Interaction
             {
                 networkObject.transform.position = throwPosition;
 
-                Collider[] colliders = networkObject.GetComponentsInChildren<Collider>();
-                foreach (Collider col in colliders)
+                PickupInteractable pickup = networkObject.GetComponent<PickupInteractable>();
+                if (pickup != null)
                 {
-                    col.enabled = true;
+                    pickup.SetCollidersEnabled(true);
                 }
 
                 Rigidbody rb = networkObject.GetComponent<Rigidbody>();

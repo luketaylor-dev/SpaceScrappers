@@ -10,7 +10,7 @@ namespace SpaceScrappers.Networking
         [SerializeField] private Camera playerCamera;
         [SerializeField] private AudioListener audioListener;
         [SerializeField] private Canvas playerUI;
-    
+
         [Header("Character Model")]
         [SerializeField] private GameObject characterModel;
         [SerializeField] private Renderer[] characterRenderers;
@@ -40,81 +40,81 @@ namespace SpaceScrappers.Networking
             }
         }
 
-    public override void OnNetworkSpawn()
-    {
-        if (!IsOwner)
+        public override void OnNetworkSpawn()
         {
-            DisableLocalComponents();
-            ShowCharacterModel();
-        }
-        else
-        {
-            EnableLocalComponents();
-            HideCharacterModel();
-        }
-    }
-
-    private void DisableLocalComponents()
-    {
-        if (localController != null)
-            localController.enabled = false;
-
-        if (playerCamera != null)
-            playerCamera.enabled = false;
-
-        if (audioListener != null)
-            audioListener.enabled = false;
-
-        if (playerUI != null)
-            playerUI.enabled = false;
-    }
-
-    private void EnableLocalComponents()
-    {
-        if (localController != null)
-            localController.enabled = true;
-
-        if (playerCamera != null)
-            playerCamera.enabled = true;
-
-        if (audioListener != null)
-            audioListener.enabled = true;
-
-        if (playerUI != null)
-            playerUI.enabled = true;
-    }
-
-    private void HideCharacterModel()
-    {
-        if (characterModel != null)
-            characterModel.SetActive(false);
-
-        if (characterRenderers != null)
-        {
-            foreach (var renderer in characterRenderers)
+            if (!IsOwner)
             {
-                if (renderer != null)
-                    renderer.enabled = false;
+                DisableLocalComponents();
+                ShowCharacterModel();
+            }
+            else
+            {
+                EnableLocalComponents();
+                HideCharacterModel();
             }
         }
-    }
 
-    private void ShowCharacterModel()
-    {
-        if (characterModel != null)
-            characterModel.SetActive(true);
-
-        if (characterRenderers != null)
+        private void DisableLocalComponents()
         {
-            foreach (var renderer in characterRenderers)
+            if (localController != null)
+                localController.enabled = false;
+
+            if (playerCamera != null)
+                playerCamera.enabled = false;
+
+            if (audioListener != null)
+                audioListener.enabled = false;
+
+            if (playerUI != null)
+                playerUI.enabled = false;
+        }
+
+        private void EnableLocalComponents()
+        {
+            if (localController != null)
+                localController.enabled = true;
+
+            if (playerCamera != null)
+                playerCamera.enabled = true;
+
+            if (audioListener != null)
+                audioListener.enabled = true;
+
+            if (playerUI != null)
+                playerUI.enabled = true;
+        }
+
+        private void HideCharacterModel()
+        {
+            if (characterModel != null)
+                characterModel.SetActive(false);
+
+            if (characterRenderers != null)
             {
-                if (renderer != null)
-                    renderer.enabled = true;
+                foreach (var renderer in characterRenderers)
+                {
+                    if (renderer != null)
+                        renderer.enabled = false;
+                }
             }
         }
-    }
 
-    private void RespawnPlayer()
+        private void ShowCharacterModel()
+        {
+            if (characterModel != null)
+                characterModel.SetActive(true);
+
+            if (characterRenderers != null)
+            {
+                foreach (var renderer in characterRenderers)
+                {
+                    if (renderer != null)
+                        renderer.enabled = true;
+                }
+            }
+        }
+
+        private void RespawnPlayer()
         {
             transform.position = respawnPosition;
 

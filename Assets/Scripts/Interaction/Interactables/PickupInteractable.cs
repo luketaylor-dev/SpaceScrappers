@@ -17,12 +17,14 @@ namespace SpaceScrappers.Interaction
 
         private Collider objectCollider;
         private Collider lastThrowerCollider;
+        private Collider[] cachedColliders;
         private float ignoreCollisionTime = 0.5f;
 
         private void Awake()
         {
             outlineEffect = GetComponent<OutlineEffect>();
             objectCollider = GetComponent<Collider>();
+            cachedColliders = GetComponentsInChildren<Collider>();
         }
 
         public void OnHoverStart()
@@ -89,6 +91,18 @@ namespace SpaceScrappers.Interaction
             }
 
             NetworkObject.ChangeOwnership(newOwnerId);
+        }
+
+        public void SetCollidersEnabled(bool enabled)
+        {
+            if (cachedColliders == null)
+                return;
+
+            foreach (Collider col in cachedColliders)
+            {
+                if (col != null)
+                    col.enabled = enabled;
+            }
         }
     }
 }
