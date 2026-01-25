@@ -11,23 +11,34 @@ namespace SpaceScrappers.Networking
         [SerializeField] private AudioListener audioListener;
         [SerializeField] private Canvas playerUI;
     
-    [Header("Character Model")]
-    [SerializeField] private GameObject characterModel;
-    [SerializeField] private Renderer[] characterRenderers;
+        [Header("Character Model")]
+        [SerializeField] private GameObject characterModel;
+        [SerializeField] private Renderer[] characterRenderers;
 
-    private void Awake()
-    {
-        if (localController == null)
-            localController = GetComponent<FirstPersonController>();
-    }
+        [Header("Fall Detection")]
+        [SerializeField] private float fallThreshold = -10f;
+        [SerializeField] private Vector3 respawnPosition = Vector3.zero;
 
-    private void Update()
-    {
-        if (transform.position.y < -10)
+        private Rigidbody playerRigidbody;
+
+        private void Awake()
         {
-            transform.position = NetworkManager.Singleton.transform.position;
+            if (localController == null)
+                localController = GetComponent<FirstPersonController>();
+
+            playerRigidbody = GetComponent<Rigidbody>();
         }
-    }
+
+        private void Update()
+        {
+            if (!IsServer)
+                return;
+
+            if (transform.position.y < fallThreshold)
+            {
+                RespawnPlayer();
+            }
+        }
 
     public override void OnNetworkSpawn()
     {
@@ -101,7 +112,28 @@ namespace SpaceScrappers.Networking
                     renderer.enabled = true;
             }
         }
-    }
+
+        private void RespawnPlayer()
+        {
+            transform.position = respawnPosition;
+
+            if (playerRigidbody != null)
+            {
+                playerRigidbody.linearVelocity = Vector3.zero;
+                playerRigidbody.angularVelocity = Vector3.zero;
+            }
+
+            RespawnPlayerClientRpc();
+        }
+
+        [ClientRpc]
+        private void RespawnPlayerClientRpc()
+        {
+            if (IsOwner)
+            {
+                Debug.Log("Player respawned after falling");
+            }
+        }
     }
 }
 
