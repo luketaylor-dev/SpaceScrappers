@@ -13,6 +13,8 @@ namespace SpaceScrappers.Networking
         [SerializeField] private bool autoStartInBuild = true;
         [SerializeField] private ConnectionMode connectionMode = ConnectionMode.Auto;
 
+        private const string LISTEN_ALL_INTERFACES = "0.0.0.0";
+
         private enum ConnectionMode
         {
             Auto,
@@ -21,138 +23,138 @@ namespace SpaceScrappers.Networking
             Server
         }
 
-    private void Start()
-    {
-        ConfigureTransport();
-        
-        if (ShouldAutoStart())
+        private void Start()
         {
-            StartConnection();
-        }
-    }
+            ConfigureTransport();
 
-    private void ConfigureTransport()
-    {
-        if (NetworkManager.Singleton == null)
-        {
-            Debug.LogError("NetworkManager not found!");
-            return;
-        }
-
-        if (NetworkManager.Singleton.NetworkConfig.NetworkTransport is UnityTransport transport)
-        {
-            if (connectionMode == ConnectionMode.Client || (connectionMode == ConnectionMode.Auto && !Application.isEditor))
+            if (ShouldAutoStart())
             {
-                transport.ConnectionData.Address = serverIP;
-                transport.ConnectionData.Port = serverPort;
-                Debug.Log($"Configured transport for client connection to {serverIP}:{serverPort}");
+                StartConnection();
+            }
+        }
+
+        private void ConfigureTransport()
+        {
+            if (NetworkManager.Singleton == null)
+            {
+                Debug.LogError("NetworkManager not found!");
+                return;
+            }
+
+            if (NetworkManager.Singleton.NetworkConfig.NetworkTransport is UnityTransport transport)
+            {
+                if (connectionMode == ConnectionMode.Client || (connectionMode == ConnectionMode.Auto && !Application.isEditor))
+                {
+                    transport.ConnectionData.Address = serverIP;
+                    transport.ConnectionData.Port = serverPort;
+                    Debug.Log($"Configured transport for client connection to {serverIP}:{serverPort}");
+                }
+                else
+                {
+                    transport.ConnectionData.ServerListenAddress = LISTEN_ALL_INTERFACES;
+                    transport.ConnectionData.Port = serverPort;
+                    Debug.Log($"Configured transport for host/server on port {serverPort}");
+                }
             }
             else
             {
-                transport.ConnectionData.ServerListenAddress = "0.0.0.0";
-                transport.ConnectionData.Port = serverPort;
-                Debug.Log($"Configured transport for host/server on port {serverPort}");
+                Debug.LogError("UnityTransport not found on NetworkManager!");
             }
         }
-        else
-        {
-            Debug.LogError("UnityTransport not found on NetworkManager!");
-        }
-    }
 
-    private bool ShouldAutoStart()
-    {
-        if (Application.isEditor)
+        private bool ShouldAutoStart()
         {
-            return autoStartInEditor;
-        }
-        else
-        {
-            return autoStartInBuild;
-        }
-    }
-
-    private void StartConnection()
-    {
-        if (NetworkManager.Singleton == null)
-        {
-            Debug.LogError("NetworkManager not found!");
-            return;
+            if (Application.isEditor)
+            {
+                return autoStartInEditor;
+            }
+            else
+            {
+                return autoStartInBuild;
+            }
         }
 
-        if (NetworkManager.Singleton.IsClient || NetworkManager.Singleton.IsServer)
+        private void StartConnection()
         {
-            Debug.LogWarning("NetworkManager is already running!");
-            return;
+            if (NetworkManager.Singleton == null)
+            {
+                Debug.LogError("NetworkManager not found!");
+                return;
+            }
+
+            if (NetworkManager.Singleton.IsClient || NetworkManager.Singleton.IsServer)
+            {
+                Debug.LogWarning("NetworkManager is already running!");
+                return;
+            }
+
+            ConnectionMode mode = connectionMode;
+            if (mode == ConnectionMode.Auto)
+            {
+                mode = Application.isEditor ? ConnectionMode.Host : ConnectionMode.Client;
+            }
+
+            switch (mode)
+            {
+                case ConnectionMode.Host:
+                    if (NetworkManager.Singleton.StartHost())
+                    {
+                        Debug.Log("Started as Host");
+                    }
+                    else
+                    {
+                        Debug.LogError("Failed to start as Host");
+                    }
+                    break;
+
+                case ConnectionMode.Client:
+                    if (NetworkManager.Singleton.StartClient())
+                    {
+                        Debug.Log($"Started as Client connecting to {serverIP}:{serverPort}");
+                    }
+                    else
+                    {
+                        Debug.LogError("Failed to start as Client");
+                    }
+                    break;
+
+                case ConnectionMode.Server:
+                    if (NetworkManager.Singleton.StartServer())
+                    {
+                        Debug.Log("Started as Server");
+                    }
+                    else
+                    {
+                        Debug.LogError("Failed to start as Server");
+                    }
+                    break;
+            }
         }
 
-        ConnectionMode mode = connectionMode;
-        if (mode == ConnectionMode.Auto)
+        public void SetServerIP(string ip)
         {
-            mode = Application.isEditor ? ConnectionMode.Host : ConnectionMode.Client;
+            serverIP = ip;
+            ConfigureTransport();
         }
 
-        switch (mode)
+        public void SetServerPort(ushort port)
         {
-            case ConnectionMode.Host:
-                if (NetworkManager.Singleton.StartHost())
-                {
-                    Debug.Log("Started as Host");
-                }
-                else
-                {
-                    Debug.LogError("Failed to start as Host");
-                }
-                break;
-
-            case ConnectionMode.Client:
-                if (NetworkManager.Singleton.StartClient())
-                {
-                    Debug.Log($"Started as Client connecting to {serverIP}:{serverPort}");
-                }
-                else
-                {
-                    Debug.LogError("Failed to start as Client");
-                }
-                break;
-
-            case ConnectionMode.Server:
-                if (NetworkManager.Singleton.StartServer())
-                {
-                    Debug.Log("Started as Server");
-                }
-                else
-                {
-                    Debug.LogError("Failed to start as Server");
-                }
-                break;
+            serverPort = port;
+            ConfigureTransport();
         }
-    }
 
-    public void SetServerIP(string ip)
-    {
-        serverIP = ip;
-        ConfigureTransport();
-    }
+        public void StartAsHost()
+        {
+            connectionMode = ConnectionMode.Host;
+            ConfigureTransport();
+            StartConnection();
+        }
 
-    public void SetServerPort(ushort port)
-    {
-        serverPort = port;
-        ConfigureTransport();
-    }
-
-    public void StartAsHost()
-    {
-        connectionMode = ConnectionMode.Host;
-        ConfigureTransport();
-        StartConnection();
-    }
-
-    public void StartAsClient()
-    {
-        connectionMode = ConnectionMode.Client;
-        ConfigureTransport();
-        StartConnection();
-    }
+        public void StartAsClient()
+        {
+            connectionMode = ConnectionMode.Client;
+            ConfigureTransport();
+            StartConnection();
+        }
     }
 }

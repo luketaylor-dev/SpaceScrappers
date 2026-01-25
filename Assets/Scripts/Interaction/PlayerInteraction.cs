@@ -13,6 +13,7 @@ namespace SpaceScrappers.Interaction
 
         [SerializeField] private Transform holdSpotPosition;
         [SerializeField] private float throwForce = 10f;
+        [SerializeField] private float throwDistanceFromCamera = 1.5f;
 
         private NetworkObject heldObject;
         private Rigidbody heldObjectRigidbody;
@@ -286,7 +287,7 @@ namespace SpaceScrappers.Interaction
             }
 
             Vector3 throwDirection = playerCamera.transform.forward;
-            Vector3 throwPosition = playerCamera.transform.position + throwDirection * 1.5f;
+            Vector3 throwPosition = playerCamera.transform.position + throwDirection * throwDistanceFromCamera;
             DropObjectServerRpc(heldObject.NetworkObjectId, throwDirection, throwPosition);
 
             heldObject = null;

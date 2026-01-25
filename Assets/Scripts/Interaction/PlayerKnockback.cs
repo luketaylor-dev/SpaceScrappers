@@ -10,6 +10,14 @@ namespace SpaceScrappers.Interaction
         [SerializeField] private float knockbackForce = 15f;
         [SerializeField] private float knockbackDuration = 2f;
         [SerializeField] private float minVelocityForKnockback = 5f;
+        [SerializeField] private float minUpwardKnockback = 0.3f;
+        [SerializeField] private float velocityForceScale = 10f;
+        [SerializeField] private Vector2 torqueRangeX = new Vector2(-1f, 1f);
+        [SerializeField] private Vector2 torqueRangeY = new Vector2(-0.5f, 0.5f);
+        [SerializeField] private Vector2 torqueRangeZ = new Vector2(-1f, 1f);
+        [SerializeField] private float torqueMultiplier = 0.5f;
+
+        private const float BASE_FORCE_MULTIPLIER = 1f;
 
         private Rigidbody playerRigidbody;
         private RigidbodyConstraints originalConstraints;
@@ -43,10 +51,10 @@ namespace SpaceScrappers.Interaction
                 return;
 
             Vector3 knockbackDirection = collision.relativeVelocity.normalized;
-            knockbackDirection.y = Mathf.Max(0.3f, knockbackDirection.y);
+            knockbackDirection.y = Mathf.Max(minUpwardKnockback, knockbackDirection.y);
 
-            float forceMultiplier = Mathf.Clamp01((collisionVelocity - minVelocityForKnockback) / 10f);
-            float finalForceMultiplier = 1f + forceMultiplier;
+            float forceMultiplier = Mathf.Clamp01((collisionVelocity - minVelocityForKnockback) / velocityForceScale);
+            float finalForceMultiplier = BASE_FORCE_MULTIPLIER + forceMultiplier;
 
             NetworkObject projectileNetworkObject = collision.gameObject.GetComponent<NetworkObject>();
 
@@ -98,10 +106,10 @@ namespace SpaceScrappers.Interaction
                 playerRigidbody.AddForce(knockbackForceVector, ForceMode.Impulse);
 
                 Vector3 torque = new Vector3(
-                    Random.Range(-1f, 1f),
-                    Random.Range(-0.5f, 0.5f),
-                    Random.Range(-1f, 1f)
-                ) * (knockbackForce * 0.5f);
+                    Random.Range(torqueRangeX.x, torqueRangeX.y),
+                    Random.Range(torqueRangeY.x, torqueRangeY.y),
+                    Random.Range(torqueRangeZ.x, torqueRangeZ.y)
+                ) * (knockbackForce * torqueMultiplier);
                 playerRigidbody.AddTorque(torque, ForceMode.Impulse);
             }
 

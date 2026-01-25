@@ -16,7 +16,10 @@ namespace SpaceScrappers.Interaction
         private Collider objectCollider;
         private Collider lastThrowerCollider;
         private Collider[] cachedColliders;
-        private float ignoreCollisionTime = 0.5f;
+
+        [SerializeField] private float ignoreCollisionTime = 0.5f;
+
+        private const ulong NO_HOLDER_OBJECT_ID = 0;
 
         private void Awake()
         {
@@ -58,7 +61,7 @@ namespace SpaceScrappers.Interaction
                 {
                     StartCoroutine(IgnoreCollisionTemporarily(playerCollider));
                 }
-                ChangeOwnershipServerRpc(NetworkManager.ServerClientId, 0, true);
+                ChangeOwnershipServerRpc(NetworkManager.ServerClientId, NO_HOLDER_OBJECT_ID, true);
                 return;
             }
             OnHoverEnd();
