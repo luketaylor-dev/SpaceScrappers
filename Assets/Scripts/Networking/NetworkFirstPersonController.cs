@@ -112,8 +112,9 @@ namespace SpaceScrappers.Networking
                     renderer.enabled = true;
             }
         }
+    }
 
-        private void RespawnPlayer()
+    private void RespawnPlayer()
         {
             transform.position = respawnPosition;
 
