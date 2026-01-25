@@ -127,7 +127,7 @@ namespace SpaceScrappers.Networking
             RespawnPlayerClientRpc();
         }
 
-        [ClientRpc]
+        [Rpc(SendTo.ClientsAndHost)]
         private void RespawnPlayerClientRpc()
         {
             if (IsOwner)

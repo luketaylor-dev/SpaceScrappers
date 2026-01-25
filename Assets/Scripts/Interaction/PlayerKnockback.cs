@@ -61,7 +61,7 @@ namespace SpaceScrappers.Interaction
             }
         }
 
-        [ServerRpc]
+        [Rpc(SendTo.Server)]
         private void ApplyKnockbackServerRpc(ulong projectileObjectId, Vector3 direction, float forceMultiplier)
         {
             if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(projectileObjectId,
@@ -73,7 +73,7 @@ namespace SpaceScrappers.Interaction
             ApplyKnockbackClientRpc(direction, forceMultiplier);
         }
 
-        [ClientRpc]
+        [Rpc(SendTo.ClientsAndHost)]
         private void ApplyKnockbackClientRpc(Vector3 direction, float forceMultiplier)
         {
             if (IsOwner && !isKnockedDown)

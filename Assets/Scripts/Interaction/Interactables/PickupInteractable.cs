@@ -12,7 +12,7 @@ namespace SpaceScrappers.Interaction
         private readonly IInteractable.InteractType interactType = IInteractable.InteractType.Pickup;
 
         private NetworkObject currentHolder;
-        
+
         private Collider objectCollider;
         private Collider lastThrowerCollider;
         private Collider[] cachedColliders;
@@ -72,7 +72,7 @@ namespace SpaceScrappers.Interaction
             Physics.IgnoreCollision(objectCollider, playerCollider, false);
         }
 
-        [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+        [Rpc(SendTo.Server)]
         private void ChangeOwnershipServerRpc(ulong newOwnerId, ulong holderObjectId, bool isDropping)
         {
             if (isDropping)

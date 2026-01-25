@@ -194,7 +194,7 @@ namespace SpaceScrappers.Interaction
             pickupInteractable.enabled = false;
         }
 
-        [ServerRpc]
+        [Rpc(SendTo.Server)]
         private void PickupObjectServerRpc(ulong objectId)
         {
             Debug.Log("Pickup");
@@ -225,7 +225,7 @@ namespace SpaceScrappers.Interaction
             }
         }
 
-        [ClientRpc]
+        [Rpc(SendTo.ClientsAndHost)]
         private void PickupObjectClientRpc(ulong objectId)
         {
             if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(objectId, out NetworkObject networkObject))
@@ -293,7 +293,7 @@ namespace SpaceScrappers.Interaction
             heldObjectRigidbody = null;
         }
 
-        [ServerRpc]
+        [Rpc(SendTo.Server)]
         private void DropObjectServerRpc(ulong objectId, Vector3 throwDirection, Vector3 throwPosition)
         {
             if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(objectId, out NetworkObject networkObject))
@@ -319,7 +319,7 @@ namespace SpaceScrappers.Interaction
             }
         }
 
-        [ClientRpc]
+        [Rpc(SendTo.ClientsAndHost)]
         private void DropObjectClientRpc(ulong objectId, Vector3 throwDirection, Vector3 throwPosition)
         {
             if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(objectId, out NetworkObject networkObject))
