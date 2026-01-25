@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace SpaceScrappers.Interaction
 {
-    [RequireComponent(typeof(NetworkObject), typeof(OutlineEffect))]
+    [RequireComponent(typeof(NetworkObject), typeof(StencilOutlineEffect))]
     public class UseInteractable : NetworkBehaviour, IInteractable
     {
         private IInteractable.InteractType interactType = IInteractable.InteractType.Use;
-        private OutlineEffect outlineEffect;
+        private StencilOutlineEffect outlineEffect;
 
         private void Awake()
         {
-            outlineEffect = GetComponent<OutlineEffect>();
+            outlineEffect = GetComponent<StencilOutlineEffect>();
         }
         public IInteractable.InteractType GetInteractType()
         {

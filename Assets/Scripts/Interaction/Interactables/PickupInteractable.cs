@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace SpaceScrappers.Interaction
 {
-    [RequireComponent(typeof(NetworkObject), typeof(Rigidbody), typeof(OutlineEffect))]
+    [RequireComponent(typeof(NetworkObject), typeof(Rigidbody), typeof(StencilOutlineEffect))]
     public class PickupInteractable : NetworkBehaviour, IInteractable
     {
-        private OutlineEffect outlineEffect;
+        private StencilOutlineEffect outlineEffect;
 
         private readonly IInteractable.InteractType interactType = IInteractable.InteractType.Pickup;
 
@@ -24,7 +24,7 @@ namespace SpaceScrappers.Interaction
 
         private void Awake()
         {
-            outlineEffect = GetComponent<OutlineEffect>();
+            outlineEffect = GetComponent<StencilOutlineEffect>();
             objectCollider = GetComponent<Collider>();
             cachedColliders = GetComponentsInChildren<Collider>();
         }
