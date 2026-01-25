@@ -2,7 +2,7 @@ using Football;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Interaction
+namespace SpaceScrappers.Interaction
 {
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerKnockback : NetworkBehaviour

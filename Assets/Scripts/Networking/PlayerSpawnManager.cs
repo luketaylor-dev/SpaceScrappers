@@ -1,10 +1,12 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerSpawnManager : NetworkBehaviour
+namespace SpaceScrappers.Networking
 {
-    [SerializeField] private Transform[] spawnPoints;
-    private int nextSpawnIndex = 0;
+    public class PlayerSpawnManager : NetworkBehaviour
+    {
+        [SerializeField] private Transform[] spawnPoints;
+        private int nextSpawnIndex = 0;
 
     private void Start()
     {
@@ -51,6 +53,7 @@ public class PlayerSpawnManager : NetworkBehaviour
         {
             NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
         }
+    }
     }
 }
 

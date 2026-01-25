@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Interaction
+namespace SpaceScrappers.Interaction
 {
     [RequireComponent(typeof(NetworkObject), typeof(Rigidbody), typeof(OutlineEffect))]
     public class PickupInteractable : NetworkBehaviour, IInteractable

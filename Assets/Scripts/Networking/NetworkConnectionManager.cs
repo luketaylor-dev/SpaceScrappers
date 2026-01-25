@@ -2,22 +2,24 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 
-public class NetworkConnectionManager : MonoBehaviour
+namespace SpaceScrappers.Networking
 {
-    [Header("Connection Settings")]
-    [SerializeField] private string serverIP = "192.168.1.100";
-    [SerializeField] private ushort serverPort = 7777;
-    [SerializeField] private bool autoStartInEditor = true;
-    [SerializeField] private bool autoStartInBuild = true;
-    [SerializeField] private ConnectionMode connectionMode = ConnectionMode.Auto;
-
-    private enum ConnectionMode
+    public class NetworkConnectionManager : MonoBehaviour
     {
-        Auto,
-        Host,
-        Client,
-        Server
-    }
+        [Header("Connection Settings")]
+        [SerializeField] private string serverIP = "192.168.1.100";
+        [SerializeField] private ushort serverPort = 7777;
+        [SerializeField] private bool autoStartInEditor = true;
+        [SerializeField] private bool autoStartInBuild = true;
+        [SerializeField] private ConnectionMode connectionMode = ConnectionMode.Auto;
+
+        private enum ConnectionMode
+        {
+            Auto,
+            Host,
+            Client,
+            Server
+        }
 
     private void Start()
     {
@@ -151,5 +153,6 @@ public class NetworkConnectionManager : MonoBehaviour
         connectionMode = ConnectionMode.Client;
         ConfigureTransport();
         StartConnection();
+    }
     }
 }

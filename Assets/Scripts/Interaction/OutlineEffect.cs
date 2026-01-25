@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Interaction
+namespace SpaceScrappers.Interaction
 {
     public class OutlineEffect : MonoBehaviour
     {

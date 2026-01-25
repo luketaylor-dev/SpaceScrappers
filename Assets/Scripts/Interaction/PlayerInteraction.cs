@@ -3,7 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Interaction
+namespace SpaceScrappers.Interaction
 {
     public class PlayerInteraction : NetworkBehaviour
     {

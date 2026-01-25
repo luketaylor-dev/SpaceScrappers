@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Interaction
+namespace SpaceScrappers.Interaction
 {
     public interface IInteractable
     {

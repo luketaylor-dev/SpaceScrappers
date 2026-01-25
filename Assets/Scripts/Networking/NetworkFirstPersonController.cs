@@ -2,12 +2,14 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
-public class NetworkFirstPersonController : NetworkBehaviour
+namespace SpaceScrappers.Networking
 {
-    [SerializeField] private FirstPersonController localController;
-    [SerializeField] private Camera playerCamera;
-    [SerializeField] private AudioListener audioListener;
-    [SerializeField] private Canvas playerUI;
+    public class NetworkFirstPersonController : NetworkBehaviour
+    {
+        [SerializeField] private FirstPersonController localController;
+        [SerializeField] private Camera playerCamera;
+        [SerializeField] private AudioListener audioListener;
+        [SerializeField] private Canvas playerUI;
     
     [Header("Character Model")]
     [SerializeField] private GameObject characterModel;
@@ -99,6 +101,7 @@ public class NetworkFirstPersonController : NetworkBehaviour
                     renderer.enabled = true;
             }
         }
+    }
     }
 }
 

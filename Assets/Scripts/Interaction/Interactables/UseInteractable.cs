@@ -1,7 +1,7 @@
 ﻿using Unity.Netcode;
 using UnityEngine;
 
-namespace Interaction
+namespace SpaceScrappers.Interaction
 {
     [RequireComponent(typeof(NetworkObject), typeof(OutlineEffect))]
     public class UseInteractable : NetworkBehaviour, IInteractable
