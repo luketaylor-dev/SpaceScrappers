@@ -8,10 +8,7 @@ namespace SpaceScrappers.Interaction
         enum InteractType
         {
             Pickup,
-            Use,
-            Examine,
-            Talk,
-            Inspect
+            Use
         }
 
         InteractType GetInteractType();

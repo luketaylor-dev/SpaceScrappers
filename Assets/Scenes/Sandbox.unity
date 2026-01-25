@@ -2842,6 +2842,7 @@ GameObject:
   - component: {fileID: 706451109}
   - component: {fileID: 706451108}
   - component: {fileID: 706451110}
+  - component: {fileID: 706451111}
   m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
@@ -3020,6 +3021,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &706451111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706451102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f90e026667b644db2531413c2349cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpaceScrappers.Interaction.StencilOutlineEffect
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineWidth: 0.03
+  outlineMaterial: {fileID: 0}
 --- !u!43 &708318508
 Mesh:
   m_ObjectHideFlags: 0
@@ -6160,9 +6176,9 @@ GameObject:
   - component: {fileID: 1557104247}
   - component: {fileID: 1557104246}
   - component: {fileID: 1557104245}
-  - component: {fileID: 1557104244}
   - component: {fileID: 1557104243}
   - component: {fileID: 1557104242}
+  - component: {fileID: 1557104249}
   m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
@@ -6225,19 +6241,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interaction.UseInteractable
   ShowTopMostFoldoutHeaderGroup: 1
---- !u!114 &1557104244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1557104240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 805b8f2f4d157c9f78b1a4ca488be4fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interaction.OutlineEffect
-  outlineMaterial: {fileID: 2100000, guid: 5d42b99da31da1b5782c5708541e9c72, type: 2}
 --- !u!114 &1557104245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6341,6 +6344,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557104240}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1557104249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557104240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f90e026667b644db2531413c2349cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpaceScrappers.Interaction.StencilOutlineEffect
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineWidth: 0.03
+  outlineMaterial: {fileID: 2100000, guid: 79fd37e9946c2c642b33ce6c3b92ab43, type: 2}
 --- !u!1 &1565053947
 GameObject:
   m_ObjectHideFlags: 0

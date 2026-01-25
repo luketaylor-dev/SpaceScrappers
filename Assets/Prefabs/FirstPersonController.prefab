@@ -830,9 +830,11 @@ GameObject:
   - component: {fileID: 974380172550165941}
   - component: {fileID: 7145469354280214514}
   - component: {fileID: 7609786798426153432}
-  - component: {fileID: 1250030930212401006}
   - component: {fileID: 5337521180867102414}
   - component: {fileID: 4221223971747565871}
+  - component: {fileID: -1256997312743977757}
+  - component: {fileID: -8491462144602290278}
+  - component: {fileID: -4271819758721721284}
   m_Layer: 7
   m_Name: FirstPersonController
   m_TagString: Player
@@ -1035,7 +1037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1438260821
+  GlobalObjectIdHash: 3136417517
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1111,27 +1113,6 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
---- !u!114 &1250030930212401006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5124725896360430441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e90a490f8500e338caec5ed6653297b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interaction.PlayerInteraction
-  ShowTopMostFoldoutHeaderGroup: 1
-  playerCamera: {fileID: 4849535280377543764}
-  interactionDistance: 4
-  interactionLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  interactActionReference: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  holdSpotPosition: {fileID: 1009212099750733329}
-  throwForce: 20
 --- !u!114 &5337521180867102414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1151,6 +1132,8 @@ MonoBehaviour:
   playerUI: {fileID: 7160021311551291861}
   characterModel: {fileID: 3255952758157393304}
   characterRenderers: []
+  fallThreshold: -10
+  respawnPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4221223971747565871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1168,6 +1151,60 @@ MonoBehaviour:
   knockbackForce: 15
   knockbackDuration: 2
   minVelocityForKnockback: 5
+  minUpwardKnockback: 0.3
+  velocityForceScale: 10
+  torqueRangeX: {x: -1, y: 1}
+  torqueRangeY: {x: -0.5, y: 0.5}
+  torqueRangeZ: {x: -1, y: 1}
+  torqueMultiplier: 0.5
+--- !u!114 &-1256997312743977757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5124725896360430441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ba0fbef931f1bd44893293f1ed08bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpaceScrappers.Interaction.PlayerInteractionDetector
+  ShowTopMostFoldoutHeaderGroup: 1
+  playerCamera: {fileID: 4849535280377543764}
+  interactionDistance: 4
+  interactionLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &-8491462144602290278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5124725896360430441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce308121d8bc1164e8565378d6753132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpaceScrappers.Interaction.PlayerPickupSystem
+  ShowTopMostFoldoutHeaderGroup: 1
+  holdSpotPosition: {fileID: 1009212099750733329}
+  throwForce: 20
+  throwDistanceFromCamera: 1.5
+--- !u!114 &-4271819758721721284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5124725896360430441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e90a490f8500e338caec5ed6653297b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpaceScrappers.Interaction.PlayerInteraction
+  ShowTopMostFoldoutHeaderGroup: 1
+  interactActionReference: {fileID: 0}
 --- !u!1 &5272540838200382616
 GameObject:
   m_ObjectHideFlags: 0
