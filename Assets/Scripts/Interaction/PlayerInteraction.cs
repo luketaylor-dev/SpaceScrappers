@@ -1,4 +1,3 @@
-using Football;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -299,16 +298,7 @@ namespace SpaceScrappers.Interaction
         {
             if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(objectId, out NetworkObject networkObject))
             {
-                NetworkObject parentNetworkObject = null;
-                if (ProjectileDropper.Instance != null)
-                {
-                    parentNetworkObject = ProjectileDropper.Instance.GetComponent<NetworkObject>();
-                }
-
-                if (networkObject.TrySetParent(parentNetworkObject))
-                {
-                    Debug.Log("Server: Object unparented/reparented successfully");
-                }
+                networkObject.TryRemoveParent();
 
                 networkObject.transform.position = throwPosition;
 

@@ -1,4 +1,3 @@
-using Football;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -49,12 +48,6 @@ namespace SpaceScrappers.Interaction
             float forceMultiplier = Mathf.Clamp01((collisionVelocity - minVelocityForKnockback) / 10f);
             float finalForceMultiplier = 1f + forceMultiplier;
 
-            Projectile projectile = collision.gameObject.GetComponent<Projectile>();
-            if (projectile == null)
-            {
-                return;
-            }
-
             NetworkObject projectileNetworkObject = collision.gameObject.GetComponent<NetworkObject>();
 
             if (projectileNetworkObject != null && projectileNetworkObject.IsSpawned)
@@ -62,9 +55,8 @@ namespace SpaceScrappers.Interaction
                 ApplyKnockbackServerRpc(projectileNetworkObject.NetworkObjectId, knockbackDirection,
                     finalForceMultiplier);
             }
-            else if (projectileNetworkObject == null)
+            else
             {
-                projectile.DestroyProjectile();
                 StartCoroutine(KnockdownCoroutine(knockbackDirection, finalForceMultiplier));
             }
         }
@@ -75,11 +67,7 @@ namespace SpaceScrappers.Interaction
             if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(projectileObjectId,
                     out NetworkObject projectileNetworkObject))
             {
-                Projectile projectile = projectileNetworkObject.GetComponent<Projectile>();
-                if (projectile != null)
-                {
-                    projectile.DestroyProjectile();
-                }
+
             }
 
             ApplyKnockbackClientRpc(direction, forceMultiplier);
