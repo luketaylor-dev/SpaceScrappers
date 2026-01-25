@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1300349119261689788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1009212099750733329}
+  m_Layer: 7
+  m_Name: HoldSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1009212099750733329
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300349119261689788}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.55, z: 1.412}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7221050506526317127}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1391870571138425406
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +42,7 @@ GameObject:
   - component: {fileID: 8987330949395083666}
   - component: {fileID: 4144096031930751806}
   - component: {fileID: 5554913015837287973}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Reticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +118,7 @@ GameObject:
   - component: {fileID: 4849535280377543764}
   - component: {fileID: 1646400286364312872}
   - component: {fileID: 3235078147819608278}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -108,6 +139,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5992126008675680371}
+  - {fileID: 1009212099750733329}
   m_Father: {fileID: 6025337074925275862}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &4849535280377543764
@@ -213,6 +245,120 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &1740895788280660434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1081920308497878390}
+  - component: {fileID: 1152940157400165621}
+  - component: {fileID: 6920413696514767197}
+  - component: {fileID: 6887578313115103736}
+  m_Layer: 8
+  m_Name: LongCollision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1081920308497878390
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740895788280660434}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2570642275678092887}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1152940157400165621
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740895788280660434}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6920413696514767197
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740895788280660434}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &6887578313115103736
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740895788280660434}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 5
+  m_Direction: 1
+  m_Center: {x: 0, y: -1.5, z: 0}
 --- !u!1 &3251055177475104541
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +372,7 @@ GameObject:
   - component: {fileID: 5606547541700595347}
   - component: {fileID: 1335331946091438520}
   - component: {fileID: 5965358978057432562}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: VoiceChat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +486,7 @@ GameObject:
   - component: {fileID: 2808385089975589478}
   - component: {fileID: 382887813285532309}
   - component: {fileID: 7979167136436955431}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +599,7 @@ GameObject:
   m_Component:
   - component: {fileID: 530461791226956828}
   - component: {fileID: 1054758224496050287}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: VoiceChatOutput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,7 +773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9184736510164300084}
   - component: {fileID: 6980959306678098052}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SprintBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -686,7 +832,8 @@ GameObject:
   - component: {fileID: 7609786798426153432}
   - component: {fileID: 1250030930212401006}
   - component: {fileID: 5337521180867102414}
-  m_Layer: 0
+  - component: {fileID: 4221223971747565871}
+  m_Layer: 7
   m_Name: FirstPersonController
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -708,6 +855,7 @@ Transform:
   m_Children:
   - {fileID: 6025337074925275862}
   - {fileID: 7401778444595284900}
+  - {fileID: 1081920308497878390}
   - {fileID: 2317715075642889006}
   - {fileID: 530461791226956828}
   m_Father: {fileID: 0}
@@ -832,11 +980,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 4849535280377543764}
-  fov: 101.5
+  fov: 60
   invertCamera: 0
   cameraCanMove: 1
   mouseSensitivity: 0.26
-  maxLookAngle: 50
+  maxLookAngle: 90
   lockCursor: 1
   crosshair: 1
   crosshairImage: {fileID: 21300000, guid: be4ce60e2c9768c44b9b10b9c5258045, type: 3}
@@ -845,7 +993,7 @@ MonoBehaviour:
   holdToZoom: 1
   zoomKey: 324
   zoomFOV: 30
-  zoomStepTime: 5
+  zoomStepTime: 0.28
   playerCanMove: 1
   walkSpeed: 5
   maxVelocityChange: 10
@@ -855,7 +1003,7 @@ MonoBehaviour:
   sprintSpeed: 7
   sprintDuration: 5
   sprintCooldown: 0.5
-  sprintFOV: 165.1
+  sprintFOV: 80
   sprintFOVStepTime: 10
   useSprintBar: 1
   hideBarWhenFull: 1
@@ -887,7 +1035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3136417517
+  GlobalObjectIdHash: 1438260821
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -975,12 +1123,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e90a490f8500e338caec5ed6653297b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interaction.PlayerInteraction
+  ShowTopMostFoldoutHeaderGroup: 1
   playerCamera: {fileID: 4849535280377543764}
-  interactionDistance: 2
+  interactionDistance: 4
   interactionLayer:
     serializedVersion: 2
     m_Bits: 64
   interactActionReference: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  holdSpotPosition: {fileID: 1009212099750733329}
+  throwForce: 20
 --- !u!114 &5337521180867102414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1000,6 +1151,23 @@ MonoBehaviour:
   playerUI: {fileID: 7160021311551291861}
   characterModel: {fileID: 3255952758157393304}
   characterRenderers: []
+--- !u!114 &4221223971747565871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5124725896360430441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b492c7f80bbea02418222b0eda3de2eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interaction.PlayerKnockback
+  ShowTopMostFoldoutHeaderGroup: 1
+  fpsController: {fileID: 0}
+  knockbackForce: 15
+  knockbackDuration: 2
+  minVelocityForKnockback: 5
 --- !u!1 &5272540838200382616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +1179,7 @@ GameObject:
   - component: {fileID: 5992126008675680371}
   - component: {fileID: 7160021311551291861}
   - component: {fileID: 1941641875463716362}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CrosshairAndStamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1097,7 +1265,7 @@ GameObject:
   - component: {fileID: 6365442099974634325}
   - component: {fileID: 186443552303012104}
   - component: {fileID: 2714060476036519724}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1208,7 +1376,7 @@ GameObject:
   - component: {fileID: 2529548831700426065}
   - component: {fileID: 1763200429909151740}
   - component: {fileID: 718539628640153351}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1281,7 +1449,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6025337074925275862}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Joint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1315,7 +1483,7 @@ GameObject:
   - component: {fileID: 6536173282449195090}
   - component: {fileID: 4424111736145375744}
   - component: {fileID: 7810813970839323170}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: StaminaBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}

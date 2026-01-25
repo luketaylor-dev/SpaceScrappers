@@ -1,12 +1,23 @@
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Interaction
 {
     public interface IInteractable
     {
-        void Interact(GameObject player);
+        enum InteractType
+        {
+            Pickup,
+            Use,
+            Examine,
+            Talk,
+            Inspect
+        }
+
+        InteractType GetInteractType();
         void OnHoverStart();
         void OnHoverEnd();
         string GetInteractionPrompt();
+        void Interact(NetworkObject player);
     }
 }
