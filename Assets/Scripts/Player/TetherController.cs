@@ -3,7 +3,9 @@ using UnityEngine;
 namespace SpaceScrappers.Player
 {
     /// <summary>
-    /// Manages the active Tether lifecycle: fire (raycast), release, reel.
+    /// Manages up to two active Tether instances.
+    /// Tether[0] is the primary movement anchor; Tether[1] is the secondary anchor.
+    /// Reeling Tether[0] in counter-adjusts Tether[1] by the same delta, and vice versa.
     /// Fire/release are sampled in Update; constraint force is applied in FixedUpdate.
     /// </summary>
     [RequireComponent(typeof(PlayerInputController))]
@@ -22,9 +24,8 @@ namespace SpaceScrappers.Player
         [SerializeField] private float minLength = 0.5f;
         [SerializeField] private float maxLength = 50f;
 
-        public Tether ActiveTether { get; private set; }
+        public Tether[] ActiveTether { get; private set; }
 
-        // RaycastNonAlloc avoids per-frame GC allocation
         private static readonly RaycastHit[] s_hitBuffer = new RaycastHit[1];
 
         private PlayerInputController _input;
@@ -34,12 +35,16 @@ namespace SpaceScrappers.Player
         {
             _input = GetComponent<PlayerInputController>();
             _rb = GetComponent<Rigidbody>();
+            ActiveTether = new Tether[2];
         }
 
         private void Update()
         {
             if (_input.IsTetherFirePressed)
-                TryFireTether();
+                TryFireTether(0);
+
+            if (_input.IsAltTetherFirePressed)
+                TryFireTether(1);
 
             if (_input.IsTetherReleasePressed)
                 ReleaseTether();
@@ -47,17 +52,26 @@ namespace SpaceScrappers.Player
 
         private void FixedUpdate()
         {
-            if (ActiveTether == null) return;
-
-            // Scroll is a per-frame impulse, not a held axis — no Time.fixedDeltaTime
+            // Consume once — reel[0] in/out counter-adjusts tether[1] by the same delta
             float reelDelta = -_input.ConsumeReelAxis() * reelSpeed;
-            ActiveTether.AdjustLength(reelDelta, minLength, maxLength);
 
-            if (ActiveTether.ApplyConstraintForce(_rb))
-                ReleaseTether();
+            if (ActiveTether[0] != null)
+            {
+                ActiveTether[0].AdjustLength(reelDelta, minLength, maxLength);
+
+                if (ActiveTether[0].ApplyConstraintForce(_rb))
+                    ActiveTether[0] = null;
+            }
+            if (ActiveTether[1] != null)
+            {
+                ActiveTether[1].AdjustLength(-reelDelta, minLength, maxLength);
+
+                if (ActiveTether[1].ApplyConstraintForce(_rb))
+                    ActiveTether[1] = null;
+            }
         }
 
-        private void TryFireTether()
+        private void TryFireTether(int slot)
         {
             int hitCount = Physics.RaycastNonAlloc(
                 cameraTransform.position,
@@ -68,22 +82,16 @@ namespace SpaceScrappers.Player
             if (hitCount == 0) return;
 
             var hit = s_hitBuffer[0];
-            float dist = hit.distance;
 
-            if (hit.rigidbody != null)
-            {
-                var localOffset = hit.rigidbody.transform.InverseTransformPoint(hit.point);
-                ActiveTether = new Tether(hit.rigidbody, localOffset, dist, stiffness, maxTension);
-            }
-            else
-            {
-                ActiveTether = new Tether(hit.point, dist, stiffness, maxTension);
-            }
+            ActiveTether[slot] = hit.rigidbody != null
+                ? new Tether(hit.rigidbody, hit.rigidbody.transform.InverseTransformPoint(hit.point), hit.distance, stiffness, maxTension)
+                : new Tether(hit.point, hit.distance, stiffness, maxTension);
         }
 
         private void ReleaseTether()
         {
-            ActiveTether = null;
+            ActiveTether[0] = null;
+            ActiveTether[1] = null;
         }
     }
 }

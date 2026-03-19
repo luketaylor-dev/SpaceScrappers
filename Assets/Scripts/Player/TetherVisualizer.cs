@@ -3,13 +3,15 @@ using UnityEngine;
 namespace SpaceScrappers.Player
 {
     /// <summary>
-    /// Renders the active tether using a LineRenderer.
+    /// Renders one tether using a LineRenderer.
+    /// Set tetherIndex to 0 for the primary tether, 1 for the secondary.
     /// Place on a child GameObject of the player with a LineRenderer component.
     /// </summary>
     [RequireComponent(typeof(LineRenderer))]
     public class TetherVisualizer : MonoBehaviour
     {
         [SerializeField] private TetherController tetherController;
+        [SerializeField] private int tetherIndex = 0;
 
         private LineRenderer _lineRenderer;
 
@@ -22,13 +24,16 @@ namespace SpaceScrappers.Player
 
         private void LateUpdate()
         {
-            bool hasTether = tetherController.ActiveTether != null;
-            _lineRenderer.enabled = hasTether;
+            var tether = tetherController.ActiveTether[tetherIndex];
+            if (tether == null)
+            {
+                _lineRenderer.enabled = false;
+                return;
+            }
 
-            if (!hasTether) return;
-
+            _lineRenderer.enabled = true;
             _lineRenderer.SetPosition(0, tetherController.transform.position);
-            _lineRenderer.SetPosition(1, tetherController.ActiveTether.GetAnchorWorldPosition());
+            _lineRenderer.SetPosition(1, tether.GetAnchorWorldPosition());
         }
     }
 }

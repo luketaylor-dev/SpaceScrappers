@@ -55,7 +55,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -100,7 +100,7 @@
                     "name": "TetherFire",
                     "type": "Button",
                     "id": "a2b3c4d5-e6f7-8901-bcde-f12345678901",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -109,7 +109,7 @@
                     "name": "TetherRelease",
                     "type": "Button",
                     "id": "b3c4d5e6-f7a8-9012-cdef-123456789012",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -131,6 +131,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "AltTetherFire",
+                    "type": "Button",
+                    "id": "08bf7a69-e9f0-4482-9048-831eaa8d8445",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -544,7 +553,7 @@
                 {
                     "name": "",
                     "id": "f7a8b9c0-d1e2-3456-abcd-567890123456",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -595,6 +604,17 @@
                     "action": "ThrusterUpDown",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "43200816-de86-4784-86fe-c58f85780e49",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AltTetherFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

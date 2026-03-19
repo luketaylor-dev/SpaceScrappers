@@ -15,6 +15,7 @@ namespace SpaceScrappers.Player
         private InputAction _lookAction;
         private InputAction _thrusterUpDownAction;
         private InputAction _tetherFireAction;
+        private InputAction _altTetherFireAction;
         private InputAction _tetherReleaseAction;
         private InputAction _reelAxisAction;
 
@@ -24,6 +25,7 @@ namespace SpaceScrappers.Player
         public Vector2 MoveInput { get; private set; }
         public float ThrusterUpDownInput { get; private set; }
         public bool IsTetherFirePressed { get; private set; }
+        public bool IsAltTetherFirePressed { get; private set; }
         public bool IsTetherReleasePressed { get; private set; }
 
         private void Awake()
@@ -34,6 +36,7 @@ namespace SpaceScrappers.Player
             _lookAction = map.FindAction("Look", throwIfNotFound: true);
             _thrusterUpDownAction = map.FindAction("ThrusterUpDown", throwIfNotFound: true);
             _tetherFireAction = map.FindAction("TetherFire", throwIfNotFound: true);
+            _altTetherFireAction = map.FindAction("AltTetherFire", throwIfNotFound: true);
             _tetherReleaseAction = map.FindAction("TetherRelease", throwIfNotFound: true);
             _reelAxisAction = map.FindAction("ReelAxis", throwIfNotFound: true);
 
@@ -56,6 +59,7 @@ namespace SpaceScrappers.Player
 
             // WasPressedThisFrame is stable for the whole frame regardless of component Update order
             IsTetherFirePressed = _tetherFireAction.WasPressedThisFrame();
+            IsAltTetherFirePressed = _altTetherFireAction.WasPressedThisFrame();
             IsTetherReleasePressed = _tetherReleaseAction.WasPressedThisFrame();
         }
 
